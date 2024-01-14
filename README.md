@@ -13,9 +13,26 @@
 4. MQTT broker (e.g., Mosquitto).
 5. MQTT publisher and subscriber clients (e.g., Python Paho MQTT library).
 
-**Lab Steps:**
+**Introduction:**
+MQTT stands for Message Queue Telemetry Transport. It is a publish/subscribe messaging transport protocol that is lightweight, open, and designed to be easy to implement. These characteristics make it ideal for use in many situations, including constrained environments such as for communication in the Internet of Things (IoT) contexts where a small code footprint is required and network bandwidth is scarce. The protocol runs over TCP/IP, or over other similar network protocols that provide ordered, lossless, bidirectional connections.
 
-**1. Install and Configure the MQTT Broker (30 minutes):**
+MQTT can be broken down into the following components:
+**MQTT Broker:** The broker accepts messages from clients (publishers) and then delivers them to any interested clients (subscribers). Each message must belong to a specific topic. The broker is a program running on a device that acts as an intermediary between clients who publish messages and clients who have made subscriptions. 
+
+**Topic:** A namespace (or place) for messages on the broker. Clients must subscribe to and/or publish to a topic.
+
+**MQTT Client:** The client is a ‘device’ that either publishes a message to a specific topic or subscribes to a topic, or both. A publisher is a client that sends a message to the broker, using a topic name. While a subscriber informs the broker which topics it is interested in. Once subscribed, the broker sends messages published to that topic. A client can subscribe to multiple topics. However, a client must first establish a connection with the broker and can take the following actions:
+•    Publish messages that other clients might be interested in (subscribed to).
+•    Subscribe to a specific topic to receive messages from the publishers.
+•    Unsubscribe to remove a request for the messages.
+•    Disconnect from the Broker.
+
+![image](https://github.com/drfuzzi/INF2009_IoTComms/assets/108112390/cfa167ee-d747-45ee-be2f-90c795415767)
+Figure 1: An example of MQTT implementation
+
+**Lab Exercise:**
+
+**1. Install and Configure the MQTT Broker on a Raspberry Pi 400:**
 
    a. Update the Raspberry Pi's package list:
    ```
@@ -38,7 +55,7 @@
    systemctl status mosquitto
    ```
 
-**2. Create MQTT Publisher and Subscriber (30 minutes):**
+**2. Install and Configure the MQTT Publisher and Subscriber on another Raspberry Pi 400:**
 
    a. Install the Python Paho MQTT library for both publisher and subscriber:
    ```
@@ -72,7 +89,7 @@
    client.loop_forever()
    ```
 
-**3. Test MQTT Communication (30 minutes):**
+**3. Testing your MQTT Communication:**
 
    a. Open two terminal windows on the Raspberry Pi.
 
