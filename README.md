@@ -123,8 +123,5 @@ Figure 1: An example of MQTT implementation
    sudo systemctl stop mosquitto
    ```
 
-**Assessment:**
-- Demonstrate successful communication between the MQTT publisher and subscriber.
-- Explain how to set up authentication and encryption for MQTT communication.
-
-**Note:** The times provided are approximate and may vary based on individual proficiency with Raspberry Pi and MQTT.
+**Lab Assignment:**
+Create a Python script building upon this lab session to capture an image from a webcam when it receives a message through a subscriber topic (pick an appropriate topic) and subsequently transmit the captured image as a publisher via MQTT. This lab assignment will challenge you to combine webcam access, MQTT communication, and message handling to develop a practical IoT application. Your task is to refine the provided script, ensuring seamless image capture and MQTT integration.
