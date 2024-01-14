@@ -1,4 +1,4 @@
-## IoT Communications: Setting Up MQTT Broker, Publisher, and Subscriber on Raspberry Pi 400**
+## **IoT Communications: Setting Up MQTT Broker, Publisher, and Subscriber on Raspberry Pi 400**
 
 **Objective:** To learn how to install and configure an MQTT broker, create MQTT publisher and subscriber clients, and test communication between them on a Raspberry Pi 400.
 
