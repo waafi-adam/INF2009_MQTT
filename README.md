@@ -36,7 +36,7 @@ Figure 1: An example of MQTT implementation
 
 **1. Install and Configure the MQTT Broker on a Raspberry Pi 400:**
 
-   a. Update the Raspberry Pi's package list:
+   a. Update the Raspberry Pi's package list (optional):
    ```
    sudo apt update
    ```
@@ -57,14 +57,14 @@ Figure 1: An example of MQTT implementation
    systemctl status mosquitto
    ```
 
-**2. Install and Configure the MQTT Publisher and Subscriber on another Raspberry Pi 400:**
+**2. Install and Configure the MQTT Client (Publisher and/or Subscriber) on another Raspberry Pi 400:**
 
    a. Install the Python Paho MQTT library for both publisher and subscriber:
    ```
    pip install paho-mqtt
    ```
 
-   b. Create a Python script for the MQTT publisher (`mqtt_publisher.py`):
+   b. Create a Python script for the MQTT Publisher (`mqtt_publisher.py`):
    ```python
    import paho.mqtt.client as mqtt
    import time
@@ -77,7 +77,7 @@ Figure 1: An example of MQTT implementation
        time.sleep(5)
    ```
 
-   c. Create a Python script for the MQTT subscriber (`mqtt_subscriber.py`):
+   c. Create a Python script for the MQTT Subscriber (`mqtt_subscriber.py`):
    ```python
    import paho.mqtt.client as mqtt
 
@@ -107,26 +107,14 @@ Figure 1: An example of MQTT implementation
 
    d. Observe the messages being published and received in the subscriber terminal.
 
-**4. Optional Enhancements (30 minutes):**
-
-   a. Secure your MQTT broker by setting up authentication and encryption.
-
-   b. Experiment with different MQTT topics and payloads in your publisher and subscriber.
-
-**5. Conclusion and Cleanup (10 minutes):**
-
-   a. Discuss MQTT and its applications.
-
-   b. Stop the MQTT publisher and subscriber (Ctrl+C).
-
-   c. Disable and stop the Mosquitto MQTT broker:
+   e. Disable and stop the Mosquitto MQTT broker (optional):
    ```
    sudo systemctl disable mosquitto
    sudo systemctl stop mosquitto
    ```
 
 **Lab Assignment:**
-Create a Python script building upon this lab session to capture an image from a webcam when it receives a message through a subscriber topic (pick an appropriate topic) and subsequently transmit the captured image as a publisher via MQTT. This lab assignment will challenge you to combine webcam access, MQTT communication, and message handling to develop a practical IoT application. Your task is to refine the provided script, ensuring seamless image capture and MQTT integration.
+Create two Python scripts building upon this lab session to capture an image from a webcam when it receives a message through a subscriber topic (pick an appropriate topic) and subsequently transmit the captured image as a publisher via MQTT. This lab assignment will challenge you to combine webcam access, MQTT communication, and message handling to develop a practical IoT application. Your task is to refine the provided script, ensuring seamless image capture and MQTT integration.
 
 ![image](https://github.com/drfuzzi/INF2009_MQTT/assets/108112390/bd2e0190-e973-4565-b8bb-1311d804a436)
 
