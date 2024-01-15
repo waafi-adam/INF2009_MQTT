@@ -17,6 +17,7 @@
 MQTT stands for Message Queue Telemetry Transport. It is a publish/subscribe messaging transport protocol that is lightweight, open, and designed to be easy to implement. These characteristics make it ideal for use in many situations, including constrained environments such as for communication in the Internet of Things (IoT) contexts where a small code footprint is required and network bandwidth is scarce. The protocol runs over TCP/IP, or over other similar network protocols that provide ordered, lossless, bidirectional connections.
 
 MQTT can be broken down into the following components:
+
 **MQTT Broker:** The broker accepts messages from clients (publishers) and then delivers them to any interested clients (subscribers). Each message must belong to a specific topic. The broker is a program running on a device that acts as an intermediary between clients who publish messages and clients who have made subscriptions. 
 
 **Topic:** A namespace (or place) for messages on the broker. Clients must subscribe to and/or publish to a topic.
@@ -125,3 +126,7 @@ Figure 1: An example of MQTT implementation
 
 **Lab Assignment:**
 Create a Python script building upon this lab session to capture an image from a webcam when it receives a message through a subscriber topic (pick an appropriate topic) and subsequently transmit the captured image as a publisher via MQTT. This lab assignment will challenge you to combine webcam access, MQTT communication, and message handling to develop a practical IoT application. Your task is to refine the provided script, ensuring seamless image capture and MQTT integration.
+
+![image](https://github.com/drfuzzi/INF2009_MQTT/assets/108112390/f07f0adc-c867-4929-8096-865a9a686660)
+Figure 2: Overview of the Image Request System via MQTT
+
