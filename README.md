@@ -127,6 +127,6 @@ Figure 1: An example of MQTT implementation
 **Lab Assignment:**
 Create a Python script building upon this lab session to capture an image from a webcam when it receives a message through a subscriber topic (pick an appropriate topic) and subsequently transmit the captured image as a publisher via MQTT. This lab assignment will challenge you to combine webcam access, MQTT communication, and message handling to develop a practical IoT application. Your task is to refine the provided script, ensuring seamless image capture and MQTT integration.
 
-![image](https://github.com/drfuzzi/INF2009_MQTT/assets/108112390/f07f0adc-c867-4929-8096-865a9a686660)
+![image](https://github.com/drfuzzi/INF2009_MQTT/assets/108112390/bd2e0190-e973-4565-b8bb-1311d804a436)
 Figure 2: Overview of the Image Request System via MQTT
 
