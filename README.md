@@ -60,30 +60,48 @@ Figure 1: An example of MQTT implementation
      allow_anonymous true    
      ```
 
-   e. Start and enable Mosquitto to run on boot (optional):
+   e. Start your mosquitto broker manually:
+   ```
+   sudo mosquitto -c /etc/mosquitto/mosquitto.conf 
+   ```
+
+**2. Enable Mosquitto Broker to run on boot (optional)**
+
+   a. Start and enable Mosquitto to run on boot:
    ```
    sudo systemctl start mosquitto
    sudo systemctl enable mosquitto
    ```
 
-   f. Restarting Mosquitto Broker (optional) to apply the new configuration by using the following command:
+   b. Restarting Mosquitto Broker to apply the new configuration by using the following command:
    ```
    sudo systemctl restart mosquitto
    ```
 
-   g. Verify that Mosquitto is running:
+   c. Verify that Mosquitto is running:
    ```
    systemctl status mosquitto
    ```
 
-**2. Install and Configure the MQTT Client (Publisher and/or Subscriber) on another Raspberry Pi 400:**
+   d. Disable and stop the Mosquitto MQTT broker:
+   ```
+   sudo systemctl disable mosquitto
+   sudo systemctl stop mosquitto
+   ```
 
-   a. Install the Python Paho MQTT library for both publisher and subscriber:
+**3. Install and Configure the MQTT Client (Publisher and/or Subscriber) on another Raspberry Pi 400:**
+
+   a. (Remember) to activate the Virtual Environment:
+   ```
+   source myenv/bin/activate
+   ```
+   
+   b. Install the Python Paho MQTT library for both publisher and subscriber:
    ```
    pip install paho-mqtt
    ```
 
-   b. Create a Python script for the MQTT Publisher (`mqtt_publisher.py`):
+   c. Create a Python script for the MQTT Publisher (`mqtt_publisher.py`). Ensure the "localhost" is changed to the IP address of the Broker, e.g. "192.168.50.115":
    ```python
    import paho.mqtt.client as mqtt
    import time
@@ -96,7 +114,7 @@ Figure 1: An example of MQTT implementation
        time.sleep(5)
    ```
 
-   c. Create a Python script for the MQTT Subscriber (`mqtt_subscriber.py`):
+   d. Create a Python script for the MQTT Subscriber (`mqtt_subscriber.py`). Ensure the "localhost" is changed to the IP address of the Broker, e.g. "192.168.50.115":
    ```python
    import paho.mqtt.client as mqtt
 
@@ -110,27 +128,28 @@ Figure 1: An example of MQTT implementation
    client.loop_forever()
    ```
 
-**3. Testing your MQTT Communication:**
+**4. Testing your MQTT Communication:**
 
    a. Open two terminal windows on the Raspberry Pi.
 
    b. In the first terminal, run the MQTT subscriber:
    ```
-   python mqtt_subscriber.py
+   python3 mqtt_subscriber.py
    ```
 
    c. In the second terminal, run the MQTT publisher:
    ```
-   python mqtt_publisher.py
+   python3 mqtt_publisher.py
+   ```
+   
+   d. (Remember) to activate the Virtual Environment **before** running the python scripts:
+   ```
+   source myenv/bin/activate
    ```
 
-   d. Observe the messages being published and received in the subscriber terminal.
+   e. Observe the messages being published and received in the subscriber terminal.
 
-   e. Disable and stop the Mosquitto MQTT broker (optional):
-   ```
-   sudo systemctl disable mosquitto
-   sudo systemctl stop mosquitto
-   ```
+
 
 **Lab Assignment:**
 Create two Python scripts building upon this lab session to capture an image from a webcam when it receives a message through a subscriber topic (pick an appropriate topic) and subsequently transmit the captured image as a publisher via MQTT. This lab assignment will challenge you to combine webcam access, MQTT communication, and message handling to develop a practical IoT application. Your task is to refine the provided script, ensuring seamless image capture and MQTT integration.
