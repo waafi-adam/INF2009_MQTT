@@ -34,6 +34,7 @@ Figure 1: An example of MQTT implementation
 
 **Lab Exercise:**
 
+
 **1. Install and Configure the MQTT Broker on a Raspberry Pi 400:**
 
    a. Update the Raspberry Pi's package list (optional):
@@ -65,6 +66,7 @@ Figure 1: An example of MQTT implementation
    sudo mosquitto -c /etc/mosquitto/mosquitto.conf 
    ```
 
+
 **2. Enable Mosquitto Broker to run on boot (optional)**
 
    a. Start and enable Mosquitto to run on boot:
@@ -88,6 +90,7 @@ Figure 1: An example of MQTT implementation
    sudo systemctl disable mosquitto
    sudo systemctl stop mosquitto
    ```
+
 
 **3. Install and Configure the MQTT Client (Publisher and/or Subscriber) on another Raspberry Pi 400:**
 
@@ -127,6 +130,7 @@ Figure 1: An example of MQTT implementation
    client.subscribe("test/topic")
    client.loop_forever()
    ```
+
 
 **4. Testing your MQTT Communication:**
 
