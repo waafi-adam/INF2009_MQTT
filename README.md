@@ -28,7 +28,7 @@ MQTT can be broken down into the following components:
 •    Unsubscribe to remove a request for the messages.
 •    Disconnect from the Broker.
 
-![image](https://github.com/drfuzzi/INF2009_IoTComms/assets/108112390/cfa167ee-d747-45ee-be2f-90c795415767)
+![image](https://github.com/drfuzzi/INF2009_MQTT/assets/108112390/7023958e-5369-4238-ab39-98fa718fd25b)
 Figure 1: An example of MQTT implementation
 
 **Lab Exercise:**
