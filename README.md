@@ -46,13 +46,32 @@ Figure 1: An example of MQTT implementation
    sudo apt install mosquitto
    ```
 
-   c. Start and enable Mosquitto to run on boot:
+   c. Locate the Mosquitto Configuration File:
+   - Use a text editor to open the `mosquitto.conf` file located in `/etc/mosquitto/` using the following command:
+     ```
+     sudo nano /etc/mosquitto/mosquitto.conf
+     ```
+   
+   d. Edit the Mosquitto Configuration file:
+   - Inside the `mosquitto.conf` file, you'll find various configuration options. Be careful when editing this file to avoid introducing errors.
+   - Include the following into the configuration file to allow the brokker to listen to port 1883 and allow anonymous clients to connect and use the MQTT broker which means that clients can connect without providing a username and password:
+     ```
+     listener 1883
+     allow_anonymous true    
+     ```
+
+   e. Start and enable Mosquitto to run on boot (optional):
    ```
    sudo systemctl start mosquitto
    sudo systemctl enable mosquitto
    ```
 
-   d. Verify that Mosquitto is running:
+   f. Restarting Mosquitto Broker (optional) to apply the new configuration by using the following command:
+   ```
+   sudo systemctl restart mosquitto
+   ```
+
+   g. Verify that Mosquitto is running:
    ```
    systemctl status mosquitto
    ```
