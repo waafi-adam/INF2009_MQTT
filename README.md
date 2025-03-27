@@ -162,3 +162,120 @@ Create two Python scripts building upon this lab session to capture an image fro
 
 Figure 2: Overview of the Image Request System via MQTT
 
+# ASSIGNMENT DONE
+Here’s your **lab assignment** code, formatted cleanly and with helpful comments for each file:
+
+---
+
+## 🔵 **File 1: `/mqtt_publisher.py`**
+```python
+import paho.mqtt.client as mqtt
+import time
+
+# MQTT Configurations
+BROKER = "waafiadam-pi.local"  # Replace with actual broker IP or hostname
+PORT = 1883
+TOPIC = "iot/capture"          # Topic used to send capture command
+
+# Create MQTT client and connect
+client = mqtt.Client(client_id="Publisher")
+client.connect(BROKER, PORT)
+
+# Loop to wait for user input and send capture command
+while True:
+    input("Press Enter to capture an image...")  # Wait for manual trigger
+    client.publish(TOPIC, "capture")             # Send message to trigger camera
+    print("Capture command sent!")
+    time.sleep(2)  # Wait to avoid sending too many requests
+```
+
+---
+
+## 🟢 **File 2: `/mqtt_subscriber.py`**
+```python
+import paho.mqtt.client as mqtt
+import cv2
+import base64
+import numpy as np
+
+# MQTT Configurations
+BROKER = "waafiadam-pi.local"
+PORT = 1883
+SUBSCRIBE_TOPIC = "iot/capture"  # Topic to listen for capture trigger
+
+# Callback when a message is received
+def on_message(client, userdata, message):
+    print("Message received! Capturing image...")
+
+    # Access webcam and capture frame
+    cap = cv2.VideoCapture(0)
+    ret, frame = cap.read()
+    cap.release()
+
+    if ret:
+        # Encode the image to JPEG and then Base64
+        _, buffer = cv2.imencode('.jpg', frame)
+        img_base64 = base64.b64encode(buffer).decode()
+
+        # Publish encoded image to another topic
+        client.publish("iot/image", img_base64)
+        print("Image sent via MQTT!")
+    else:
+        print("Failed to capture image.")
+
+# Setup MQTT client
+client = mqtt.Client(client_id="Subscriber")
+client.on_message = on_message
+client.connect(BROKER, PORT)
+client.subscribe(SUBSCRIBE_TOPIC)
+
+# Start listening for messages forever
+client.loop_forever()
+```
+
+---
+
+## 🟣 **File 3: `/mqtt_image_receiver.py`**
+```python
+import paho.mqtt.client as mqtt
+import base64
+import cv2
+import numpy as np
+
+# MQTT Configurations
+BROKER = "waafiadam-pi.local"
+PORT = 1883
+TOPIC = "iot/image"  # Topic to receive image data
+
+# Callback when image is received
+def on_message(client, userdata, message):
+    print("Image received via MQTT!")
+
+    # Decode Base64 to image format
+    img_data = base64.b64decode(message.payload)
+    np_arr = np.frombuffer(img_data, np.uint8)
+    img = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+
+    # Show the image in a window
+    cv2.imshow("Received Image", img)
+    cv2.waitKey(5000)  # Display image for 5 seconds
+    cv2.destroyAllWindows()
+
+# Setup MQTT client
+client = mqtt.Client(client_id="ImageReceiver")
+client.on_message = on_message
+client.connect(BROKER, PORT)
+client.subscribe(TOPIC)
+
+# Start receiving messages
+client.loop_forever()
+```
+
+---
+
+### ✅ **Output Flow Summary**:
+1. **`mqtt_publisher.py`**: Sends a `"capture"` command via MQTT when user presses Enter.
+2. **`mqtt_subscriber.py`**: Listens for the capture command, takes a picture, encodes it, and publishes it.
+3. **`mqtt_image_receiver.py`**: Receives the encoded image and displays it for 5 seconds.
+
+Let me know if you want to add timestamped filenames or save images to disk as well!
